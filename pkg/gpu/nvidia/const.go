@@ -10,6 +10,7 @@ type MemoryUnit string
 const (
 	resourceName  = "aliyun.com/gpu-mem"
 	resourceCount = "aliyun.com/gpu-count"
+	resourceIdx   = "aliyun.com/gpu-idx"
 	serverSock    = pluginapi.DevicePluginPath + "aliyungpushare.sock"
 
 	OptimisticLockErrorMsg = "the object has been modified; please apply your changes to the latest version and try again"

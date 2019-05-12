@@ -6,7 +6,7 @@ import (
 	"time"
 
 	log "github.com/golang/glog"
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 )
 
 // update pod env with assigned status
@@ -117,6 +117,18 @@ func getGPUMemoryFromPodResource(pod *v1.Pod) uint {
 		}
 	}
 	return total
+}
+
+func getGPUPreferedIndexFromPodResource(pod *v1.Pod) uint {
+	var index uint
+	containers := pod.Spec.Containers
+	for _, container := range containers {
+		if val, ok := container.Resources.Limits[resourceIdx]; ok {
+			index = uint(val.Value())
+			break
+		}
+	}
+	return index
 }
 
 func podIsNotRunning(pod v1.Pod) bool {
